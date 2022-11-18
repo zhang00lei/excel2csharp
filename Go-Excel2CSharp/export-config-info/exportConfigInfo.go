@@ -30,7 +30,7 @@ public partial class DataTableManager
     {`)
 	write.WriteString("\n")
 	for _, configName := range allConfigName {
-		infoTemp := fmt.Sprintf("        textAsset = Context.Game.Loader.LoadAsset<TextAsset>(\"Assets/DevHere/Datas/Json/%s.json\");\n", configName)
+		infoTemp := fmt.Sprintf("        textAsset = Resources.Load<TextAsset>(\"Assets/DevHere/Datas/Json/%s.json\");\n", configName)
 		write.WriteString(infoTemp)
 		infoTemp = fmt.Sprintf("        T%sHelper.InitData(textAsset.text);\n", configName)
 		write.WriteString(infoTemp)
