@@ -20,8 +20,7 @@ func SaveConfigInfo(configName string) {
 func ExportCSharpInit(outPath string) {
 	write, file := util.GetFileWriter(outPath, export_type.CSharp)
 	defer file.Close()
-	write.WriteString(`using MxxM.GameClient;
-using UnityEngine;
+	write.WriteString(`using UnityEngine;
 
 public partial class DataTableManager
 {

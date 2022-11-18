@@ -54,7 +54,7 @@ func exportCSharpHelper(fileName string, write *bufio.Writer) {
 	write.WriteString(`    public static void InitData(string jsonStr)
     {
 `)
-	write.WriteString(fmt.Sprintf("        DataList = SimpleJson.SimpleJson.DeserializeObject<List<%s>>(jsonStr);\n", fileName))
+	write.WriteString(fmt.Sprintf("        DataList = LitJson.JsonMapper.ToObject<List<%s>>(jsonStr);\n", fileName))
 	write.WriteString(`        if (DataList == null || DataList.Count == 0)
         {
             Debug.LogError("反序列化异常");
@@ -120,10 +120,10 @@ func getFieldInfo(fieldName, fieldType, fieldNotes string) string {
 	notes = fmt.Sprintf(notes, fieldNotes)
 	info := "    public %s %s { get; set; }\n"
 	typeTemp := ""
-	if fieldType == "int" || fieldType == "idx1" {
+	if fieldType == "int" {
 		typeTemp = "int"
-	} else if fieldType == "float" || fieldType == "number" {
-		fieldType = "float"
+	} else if fieldType == "float" {
+		typeTemp = "float"
 	} else if fieldType == "bool" {
 		typeTemp = "bool"
 	} else {
