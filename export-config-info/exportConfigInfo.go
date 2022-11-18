@@ -3,7 +3,6 @@ package export_config_info
 import (
 	"excel2csharp/util"
 	"fmt"
-	"strings"
 	"sync"
 )
 
@@ -17,7 +16,7 @@ func SaveConfigInfo(configName string) {
 	mutex.Unlock()
 }
 
-func ExportCSharpInit(outPath, generateFileName string) {
+func ExportCSharpInit(outPath string) {
 	write, file := util.GetFileWriter(outPath)
 	defer file.Close()
 	write.WriteString(`using MxxM.GameClient;
@@ -31,9 +30,6 @@ public partial class DataTableManager
     {`)
 	write.WriteString("\n")
 	for _, configName := range allConfigName {
-		if generateFileName != "" && !strings.Contains(generateFileName, configName+",") {
-			continue
-		}
 		infoTemp := fmt.Sprintf("        textAsset = Context.Game.Loader.LoadAsset<TextAsset>(\"Assets/DevHere/Datas/Json/%s.json\");\n", configName)
 		write.WriteString(infoTemp)
 		infoTemp = fmt.Sprintf("        T%sHelper.InitData(textAsset.text);\n", configName)

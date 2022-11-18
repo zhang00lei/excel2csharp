@@ -3,6 +3,7 @@ package main
 import (
 	"excel2csharp/excel2json"
 	export_config_info "excel2csharp/export-config-info"
+	"excel2csharp/tocsharp"
 	"flag"
 	"fmt"
 	"github.com/360EntSecGroup-Skylar/excelize"
@@ -17,17 +18,8 @@ import (
 //  excel目录路径
 var excelDirPath = flag.String("excelPath", "", "input excel path")
 
-// 输出lua目录路径
-var outLuaDirPath = flag.String("outLuaPath", "", "out lua path")
-
 // 输出json目录路径
 var outJsonDirPath = flag.String("outJsonPath", "", "out json path")
-
-//  输出ConfigName路径
-var outConfigNamePath = flag.String("outConfigNamePath", "", "out config name path")
-
-//  输出ConfigPath路径
-var outConfigPathPath = flag.String("outConfigPathPath", "", "out config path path")
 
 //  输出C#目录路径
 var outCSharpDirPath = flag.String("outCSharpPath", "", "out csharp path")
@@ -35,10 +27,7 @@ var outCSharpDirPath = flag.String("outCSharpPath", "", "out csharp path")
 // 输出json反序列化C#文件
 var outCSharpConfigPath = flag.String("outCSharpConfigPath", "", "out csharp config path")
 
-// 忽略生成C#相关信息文件，为空则全部生成
-var generateCSharpFileName = flag.String("generateCSharpFileName", "", "generateCSharpFileName")
-
-func toJsonInfo(file fs.FileInfo, excelDirPath, outLuaDirPath, outJsonDirPath, outCSharpDirPath, generateCSharpFileName string) {
+func toJsonInfo(file fs.FileInfo, excelDirPath, outJsonDirPath, outCSharpDirPath string) {
 	defer waitGroup.Done()
 	if file.IsDir() {
 		return
@@ -51,7 +40,6 @@ func toJsonInfo(file fs.FileInfo, excelDirPath, outLuaDirPath, outJsonDirPath, o
 	fileSuffix := path.Ext(excelPath)
 	filenameWithSuffix := filepath.Base(excelPath)
 	fileName := strings.TrimSuffix(filenameWithSuffix, fileSuffix)
-	outLuaPath := filepath.Join(outLuaDirPath, fileName+".lua")
 	outCSharpPath := filepath.Join(outCSharpDirPath, fmt.Sprintf("T%s.cs", fileName))
 
 	f, err := excelize.OpenFile(excelPath)
@@ -71,9 +59,8 @@ func toJsonInfo(file fs.FileInfo, excelDirPath, outLuaDirPath, outJsonDirPath, o
 	fmt.Println("toPath ", outJsonPath)
 	excel2json.ExportJsonConfig(rows, outJsonPath)
 
-	if strings.Contains(generateCSharpFileName, fileName+",") || generateCSharpFileName == "" {
-		excel2csharp.ExportCSharpConfig(rows, outCSharpPath)
-	}
+	tocsharp.ExportCSharpConfig(rows, outCSharpPath)
+
 	export_config_info.SaveConfigInfo(fileName)
 }
 
@@ -82,13 +69,9 @@ var waitGroup sync.WaitGroup
 func main() {
 	flag.Parse()
 	excelDirPath := *excelDirPath
-	outLuaDirPath := *outLuaDirPath
 	outJsonDirPath := *outJsonDirPath
-	outConfigNamePath := *outConfigNamePath
-	outConfigPathPath := *outConfigPathPath
 	outCSharpDirPath := *outCSharpDirPath
 	outCSharpConfigPath := *outCSharpConfigPath
-	generateCSharpFileName := *generateCSharpFileName
 
 	//excelDirPath = "E:\\project\\codes\\Excel2JsonTools\\Table\\1"
 	//outLuaDirPath = "E:\\project\\codes\\Assets\\DevHere\\Scripts\\Lua\\Configs\\Tables"
@@ -100,15 +83,12 @@ func main() {
 	//generateCSharpFileName = "ActivateItem,BigKun,"
 
 	fmt.Println("excelPath", excelDirPath)
-	fmt.Println("outLuaPath", outLuaDirPath)
-	fmt.Println("outConfigNamePath:", outConfigNamePath)
-	fmt.Println("outConfigPathPath:", outConfigPathPath)
 
 	files, _ := ioutil.ReadDir(excelDirPath)
 	for _, file := range files {
 		waitGroup.Add(1)
-		go toJsonInfo(file, excelDirPath, outLuaDirPath, outJsonDirPath, outCSharpDirPath, generateCSharpFileName)
+		go toJsonInfo(file, excelDirPath, outJsonDirPath, outCSharpDirPath)
 	}
 	waitGroup.Wait()
-	export_config_info.ExportCSharpInit(outCSharpConfigPath, generateCSharpFileName)
+	export_config_info.ExportCSharpInit(outCSharpConfigPath)
 }
