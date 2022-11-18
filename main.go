@@ -15,6 +15,8 @@ import (
 	"sync"
 )
 
+var waitGroup sync.WaitGroup
+
 //  excel目录路径
 var excelDirPath = flag.String("excelPath", "", "input excel path")
 
@@ -47,7 +49,6 @@ func toJsonInfo(file fs.FileInfo, excelDirPath, outJsonDirPath, outCSharpDirPath
 		fmt.Println("打开excel失败", err)
 		return
 	}
-	fmt.Println("toPath", fileName)
 	rows := f.GetRows(fileName)
 
 	if strings.HasSuffix(excelPath, "CommonConfig.xlsx") {
@@ -64,8 +65,6 @@ func toJsonInfo(file fs.FileInfo, excelDirPath, outJsonDirPath, outCSharpDirPath
 	export_config_info.SaveConfigInfo(fileName)
 }
 
-var waitGroup sync.WaitGroup
-
 func main() {
 	flag.Parse()
 	excelDirPath := *excelDirPath
@@ -73,14 +72,10 @@ func main() {
 	outCSharpDirPath := *outCSharpDirPath
 	outCSharpConfigPath := *outCSharpConfigPath
 
-	//excelDirPath = "E:\\project\\codes\\Excel2JsonTools\\Table\\1"
-	//outLuaDirPath = "E:\\project\\codes\\Assets\\DevHere\\Scripts\\Lua\\Configs\\Tables"
-	//outJsonDirPath = "E:\\project\\codes\\Assets\\DevHere\\Datas\\Json"
-	//outConfigNamePath = "E:\\project\\codes\\Assets\\DevHere\\Scripts\\Lua\\Framework\\ConfigManager\\ConfigNames.lua"
-	//outConfigPathPath = "E:\\project\\codes\\Assets\\DevHere\\Scripts\\Lua\\Framework\\ConfigManager\\ConfigPath.lua"
-	//outCSharpDirPath = "E:\\project\\codes\\Assets\\DevHere\\Scripts\\C#\\DataTables"
-	//outCSharpConfigPath = "E:\\project\\codes\\Assets\\DevHere\\Scripts\\C#\\DataTables\\DataTableManager.Init.cs"
-	//generateCSharpFileName = "ActivateItem,BigKun,"
+	excelDirPath = "E:\\project\\codes1\\Excel2JsonTools\\Table\\1"
+	outJsonDirPath = "E:\\project\\excel2csharp\\test\\json"
+	outCSharpDirPath = "E:\\project\\excel2csharp\\test\\code"
+	outCSharpConfigPath = "E:\\project\\excel2csharp\\test\\code\\DataTableManager.Init.cs"
 
 	fmt.Println("excelPath", excelDirPath)
 

@@ -2,6 +2,7 @@ package util
 
 import (
 	"bufio"
+	"excel2csharp/export_type"
 	"fmt"
 	"os"
 	"path"
@@ -9,7 +10,7 @@ import (
 	"strings"
 )
 
-func GetFileWriter(outPath string) (*bufio.Writer, *os.File) {
+func GetFileWriter(outPath string, fileType export_type.FileType) (*bufio.Writer, *os.File) {
 	if _, err := os.Stat(outPath); err == nil {
 		os.Remove(outPath)
 	}
@@ -19,7 +20,9 @@ func GetFileWriter(outPath string) (*bufio.Writer, *os.File) {
 		return nil, nil
 	}
 	write := bufio.NewWriter(file)
-	write.WriteString("// this file is generate by tools,do not modify it.\n")
+	if fileType == export_type.CSharp {
+		write.WriteString("// this file is generate by tools,do not modify it.\n")
+	}
 	return write, file
 }
 

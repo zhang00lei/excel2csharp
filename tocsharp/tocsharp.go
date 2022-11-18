@@ -2,6 +2,7 @@ package tocsharp
 
 import (
 	"bufio"
+	"excel2csharp/export_type"
 	"excel2csharp/util"
 	"fmt"
 	"strings"
@@ -14,7 +15,7 @@ import (
 //  @param outCSharpPath C#文件路径
 //
 func ExportCSharpConfig(excelData [][]string, outCSharpPath string) {
-	write, file := util.GetFileWriter(outCSharpPath)
+	write, file := util.GetFileWriter(outCSharpPath, export_type.CSharp)
 	if file == nil {
 		return
 	}

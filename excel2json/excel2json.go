@@ -1,16 +1,14 @@
 package excel2json
 
 import (
+	"excel2csharp/export_type"
 	"excel2csharp/util"
 	"fmt"
 	"strings"
 )
 
 func ExportJsonConfig(excelData [][]string, outJsonPath string) {
-	if strings.Contains(outJsonPath, "OnlineReward") {
-		fmt.Println(outJsonPath)
-	}
-	write, file := util.GetFileWriter(outJsonPath)
+	write, file := util.GetFileWriter(outJsonPath, export_type.Json)
 	defer file.Close()
 	write.WriteString("[\n")
 	for i, rowData := range excelData {
@@ -41,7 +39,7 @@ func ExportJsonConfig(excelData [][]string, outJsonPath string) {
 			fieldType := excelData[3][j]
 			if fieldType == "idx1" {
 				write.WriteString(fmt.Sprintf("\"%s\":%s", "Id", cell))
-			} else if fieldType == "int" || fieldType == "float" || fieldType == "idx1" {
+			} else if fieldType == "int" || fieldType == "float" {
 				if cell == "" {
 					cell = "0"
 				}

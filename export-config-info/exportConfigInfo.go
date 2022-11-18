@@ -1,6 +1,7 @@
 package export_config_info
 
 import (
+	"excel2csharp/export_type"
 	"excel2csharp/util"
 	"fmt"
 	"sync"
@@ -17,7 +18,7 @@ func SaveConfigInfo(configName string) {
 }
 
 func ExportCSharpInit(outPath string) {
-	write, file := util.GetFileWriter(outPath)
+	write, file := util.GetFileWriter(outPath, export_type.CSharp)
 	defer file.Close()
 	write.WriteString(`using MxxM.GameClient;
 using UnityEngine;
