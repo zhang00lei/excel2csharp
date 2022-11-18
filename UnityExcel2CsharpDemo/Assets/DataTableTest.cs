@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class TestInfo
 {
+    public string StrInfo;
+    public List<string> ListStr;
+    
     public int IntInfo;
     public List<int> ListInt;
 
@@ -30,6 +33,9 @@ public class DataTableTest : MonoBehaviour
     void Start()
     {
         TestInfo testInfo = new TestInfo();
+        testInfo.StrInfo = "hello";
+        testInfo.ListStr = new List<string>() {"Hello", "World"};
+        
         testInfo.IntInfo = 1;
         testInfo.ListInt = new List<int>() {1, 11, 111, 1111};
 
@@ -47,21 +53,25 @@ public class DataTableTest : MonoBehaviour
             new Vector2(3.1f, 3.2f),
         };
 
-        testInfo.ListVector3 = new List<Vector3>()
-        {
-            new Vector3(1.1f, 1.2f, 1.3f),
-            new Vector3(2.1f, 2.2f, 2.3f),
-            new Vector3(3.1f, 3.2f, 3.3f),
-        };
+        // testInfo.ListVector3 = new List<Vector3>()
+        // {
+        //     new Vector3(1.1f, 1.2f, 1.3f),
+        //     new Vector3(2.1f, 2.2f, 2.3f),
+        //     new Vector3(3.1f, 3.2f, 3.3f),
+        // };
 
         // testInfo.Color32Info = new Color32(1, 1, 1, 1);
 
-        testInfo.testIntDict = new Dictionary<float, int>()
-        {
-            {1.2f, 1}, {2, 2}
-        };
+        // testInfo.testIntDict = new Dictionary<float, int>()
+        // {
+        //     {1.2f, 1}, {2, 2}
+        // };
 
         string str = LitJson.JsonMapper.ToJson(testInfo);
         Debug.Log(str);
+        
+        
+        
+         
     }
 }

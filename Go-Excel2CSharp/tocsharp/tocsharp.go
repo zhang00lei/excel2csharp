@@ -100,6 +100,21 @@ func exportCSharpHelper(fileName string, write *bufio.Writer) {
 }`)
 }
 
+var fieldTypeInfo = map[string]string{
+	"string":        "string",
+	"List<string>":  "List<string>",
+	"int":           "int",
+	"List<int>":     "List<int>",
+	"float":         "float",
+	"List<float>":   "List<float>",
+	"bool":          "bool",
+	"List<bool>":    "List<bool>",
+	"Vector2":       "Vector2",
+	"List<Vector2>": "List<Vector2>",
+	"Vector3":       "Vector3",
+	"List<Vector3>": "List<Vector3>",
+}
+
 //
 // getFieldInfo
 //  @Description: 获取字段详情
@@ -120,15 +135,11 @@ func getFieldInfo(fieldName, fieldType, fieldNotes string) string {
 	notes = fmt.Sprintf(notes, fieldNotes)
 	info := "    public %s %s { get; set; }\n"
 	typeTemp := ""
-	fieldType = strings.ToLower(fieldType)
-	if fieldType == "int" {
-		typeTemp = "int"
-	} else if fieldType == "float" {
-		typeTemp = "float"
-	} else if fieldType == "bool" {
-		typeTemp = "bool"
+	if typeInfo, ok := fieldTypeInfo[fieldType]; !ok {
+		util.LogInfo(util.Error, "不存在"+typeInfo+"类型")
+		typeTemp = "unknownType"
 	} else {
-		typeTemp = "string"
+		typeTemp = fieldTypeInfo[fieldType]
 	}
 	if fieldName == "id" {
 		fieldName = "Id"

@@ -38,3 +38,21 @@ func GetFileNameNoExtensionByPath(filePath string) (string, string) {
 	fileName := strings.TrimSuffix(filenameWithSuffix, fileSuffix)
 	return fileName, fileSuffix
 }
+
+type LogType int
+
+const (
+	// 导出json
+	Info LogType = iota
+	warning
+	Error
+)
+
+func LogInfo(logType LogType, msg string) {
+	if logType == warning {
+		msg = "Warning:" + msg
+	} else if logType == Error {
+		msg = "Error:" + msg
+	}
+	fmt.Println(msg)
+}

@@ -7,7 +7,7 @@ public partial class DataTableManager
 
     private void InitData()
     {
-        textAsset = Resources.Load<TextAsset>("Assets/DevHere/Datas/Json/BossConfig.json");
-        TBossConfigHelper.InitData(textAsset.text);
+        textAsset = Resources.Load<TextAsset>("Json/TestDataTable");
+        TTestDataTableHelper.InitData(textAsset.text);
     }
 }
