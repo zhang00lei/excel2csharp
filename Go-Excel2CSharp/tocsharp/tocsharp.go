@@ -120,6 +120,7 @@ func getFieldInfo(fieldName, fieldType, fieldNotes string) string {
 	notes = fmt.Sprintf(notes, fieldNotes)
 	info := "    public %s %s { get; set; }\n"
 	typeTemp := ""
+	fieldType = strings.ToLower(fieldType)
 	if fieldType == "int" {
 		typeTemp = "int"
 	} else if fieldType == "float" {
