@@ -1,3 +1,3 @@
 [
-  {"id":1,"StrInfo":"HelloWorld","ListString":"[\"Hello\",\"World\"]","IntInfo":1,"ListInt":"[1,11,111,1111]","FloatInfo":1.1,"ListFloat":"[1.1, 1.11, 1.111, 1.1111]","BoolInfo":"False","ListBool":"[false, true, false, true]"}
+  {"id":1,"StrInfo":"HelloWorld","IntInfo":1,"FloatInfo":1.1,"BoolInfo":"False"}
 ]

@@ -17,19 +17,9 @@ public class TTestDataTable
     public string StrInfo { get; set; }
 
     /// <summary>
-    /// 字符串集合
-    /// </summary>
-    public List<string> ListString { get; set; }
-
-    /// <summary>
     /// 整形
     /// </summary>
     public int IntInfo { get; set; }
-
-    /// <summary>
-    /// 整形集合
-    /// </summary>
-    public List<int> ListInt { get; set; }
 
     /// <summary>
     /// 浮点型
@@ -37,19 +27,9 @@ public class TTestDataTable
     public float FloatInfo { get; set; }
 
     /// <summary>
-    /// 浮点型集合
-    /// </summary>
-    public List<float> ListFloat { get; set; }
-
-    /// <summary>
     /// 布尔型
     /// </summary>
     public bool BoolInfo { get; set; }
-
-    /// <summary>
-    /// 布尔集合
-    /// </summary>
-    public List<bool> ListBool { get; set; }
 }
 
 public static class TTestDataTableHelper

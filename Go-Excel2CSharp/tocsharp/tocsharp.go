@@ -101,18 +101,10 @@ func exportCSharpHelper(fileName string, write *bufio.Writer) {
 }
 
 var fieldTypeInfo = map[string]string{
-	"string":        "string",
-	"List<string>":  "List<string>",
-	"int":           "int",
-	"List<int>":     "List<int>",
-	"float":         "float",
-	"List<float>":   "List<float>",
-	"bool":          "bool",
-	"List<bool>":    "List<bool>",
-	"Vector2":       "Vector2",
-	"List<Vector2>": "List<Vector2>",
-	"Vector3":       "Vector3",
-	"List<Vector3>": "List<Vector3>",
+	"string": "string",
+	"int":    "int",
+	"float":  "float",
+	"bool":   "bool",
 }
 
 //
