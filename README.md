@@ -12,16 +12,7 @@
 | 类型                  | 说明           | 默认值       |
 |---------------------|--------------|-----------|
 | int                 | 整形           | 0         |
-| List&lt;int&gt;     | 整形集合         | null      |
 | float               | 浮点型          | 0         |
-| List&lt;float&gt;   | 浮点型集合        | null      |
 | bool                | bool型        | false     |
-| List&lt;bool&gt;    | bool型集合      | null      |
 | string              | 字符串          | ""        |
-| List&lt;string&gt;  | 字符串集合        | null      |
-| Vector2             | 二元组          | (0,0)     |
-| List&lt;Vector2&gt; | 二元组集合        | null      |
-| Vector3             | 三元组          | (0,0,0)   |
-| List&lt;Vector3&gt; | 三元组集合        | (0,0,0)   |
-| Dict&lt;x,y&gt;     | 字典(x为基准类型)   | null      |
-| enum                | 枚举           |           |  
+5. 由于litjson的局限性（可自行修改litjson库），对于其他的复杂类型，可通过字符串自行实现
