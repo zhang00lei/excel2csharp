@@ -72,10 +72,10 @@ func main() {
 	outCSharpDirPath := *outCSharpDirPath
 	outCSharpConfigPath := *outCSharpConfigPath
 
-	excelDirPath = "E:\\project\\excel2csharp\\UnityExcel2CsharpDemo\\DataTable"
-	outJsonDirPath = "E:\\project\\excel2csharp\\UnityExcel2CsharpDemo\\Assets\\Resources\\Json"
-	outCSharpDirPath = "E:\\project\\excel2csharp\\UnityExcel2CsharpDemo\\Assets\\Scripts\\DataTable"
-	outCSharpConfigPath = "E:\\project\\excel2csharp\\UnityExcel2CsharpDemo\\Assets\\Scripts\\DataTable\\DataTableManager.Init.cs"
+	//excelDirPath = "E:\\project\\excel2csharp\\UnityExcel2CsharpDemo\\DataTable"
+	//outJsonDirPath = "E:\\project\\excel2csharp\\UnityExcel2CsharpDemo\\Assets\\Resources\\Json"
+	//outCSharpDirPath = "E:\\project\\excel2csharp\\UnityExcel2CsharpDemo\\Assets\\Scripts\\DataTable"
+	//outCSharpConfigPath = "E:\\project\\excel2csharp\\UnityExcel2CsharpDemo\\Assets\\Scripts\\DataTable\\DataTableManager.Init.cs"
 
 	fmt.Println("excelPath", excelDirPath)
 
