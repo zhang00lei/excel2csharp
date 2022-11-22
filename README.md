@@ -13,4 +13,4 @@
 | float               | 浮点型          | 0         |
 | bool                | bool型        | false     |
 | string              | 字符串          | ""        |
-3. 由于litjson的局限性（可自行修改litjson库），对于其他的复杂类型，可通过字符串自行实现
+3. 由于litjson的局限性（可自行修改litjson库），对于其他的复杂类型（如Vector3,List），可通过字符串自行实现
